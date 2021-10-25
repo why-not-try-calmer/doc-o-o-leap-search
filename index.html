@@ -8,39 +8,14 @@
 </head>
 
 <script src="https://unpkg.com/lunr/lunr.js"></script>
-<script src="/lib.js"></script>
-<script type="text/javascript">
-
-    var index = null
-    
-    function display(msg, duration = 0) {
-        document.getElementById("message-area").innerHTML = msg
-        if (duration > 0) setTimeout(() => { document.getElementById("message-area").innerHTML = ""}, duration * 1000)
-    }
-
-    function countChars() {
-        const val = document.getElementById("leap-search").value
-        if (val.length >= 3) display(search(val, index))
-    }
-
-    window.onload = () => {
-        if (index === null) {
-            display("Building index once, thanks for your patience...")
-            return makeLeapIndex()
-                .then(idx => {
-                    index = idx
-                    display("Okay,thanks. Ready to seach.", 3)
-                })
-                .catch(e => display("Trying to fetch & build the index, when this error occurred: ", JSON.stringify(e)))
-        }
-    }
-</script>
+<script type="text/javascript" src="lib.js"></script>
 
 <body>
     <div id="message-area"></div>
     <br />
     <label for="leap-search">Search the Leap documentation:</label>
     <input type="text" id="leap-search" required minlength="3" maxlength="14" size="6" onkeyup="countChars()"></input>
+    <div id="results-area"></div>
 </body>
 
 </html>
