@@ -22,10 +22,10 @@ function search(s) {
     }).join('')
 }
 
-window.onload = () => {
+window.onload = async () => {
     if (index === null) {
-        return fetch("leap_index.json")
-        .then(response => response.json())
-        .then(idx => index = lunr.Index.load(idx))
+        const response = await fetch("leap_index.json")
+        const idx = await response.json()
+        return index = lunr.Index.load(idx)
     }
 }
